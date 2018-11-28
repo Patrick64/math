@@ -57,9 +57,17 @@ class Math
 				$round = ee()->TMPL->fetch_param('round');
 				$decimals = ee()->TMPL->fetch_param('decimals');
 				$decimalPoint = ee()->TMPL->fetch_param('dec_point', '.');
-				$thousandsSeparator = ee()->TMPL->fetch_param('thousands_separator', ',');
+				$thousandsSeparator = ee()->TMPL->fetch_param('thousands_separator', '');
 				$absolute = ee()->TMPL->fetch_param('absolute');
 				$trailingZeros = ee()->TMPL->fetch_param('trailing_zeros');
+				$max_param = ee()->TMPL->fetch_param('max');
+				if ($max_param) {
+					@eval("\$max = $max_param;");
+					if (isset($max)) {
+						$result = min($result,$max);
+					}
+					
+				}
 
 				// Absolute value
 				if ($absolute) {
